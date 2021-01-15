@@ -18,7 +18,9 @@ jobs:
         unityVersion:
           - 2019.4.18f1
         platform:
+          - StandaloneOSX       # Build a macOS standalone (Intel 64-bit).
           - StandaloneWindows64 # Build a Windows standalone.
+          - StandaloneLinux64   # Build a Linux 64-bit standalone.
     steps:
       - uses: actions/checkout@v2
         with:
@@ -55,5 +57,5 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
-          name: ${{ matrix.platform }}-${{ matrix.buildType }}
+          name: ${{ matrix.platform }}
           path: build
