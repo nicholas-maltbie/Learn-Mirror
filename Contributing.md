@@ -24,19 +24,19 @@ Whenever you are adding new features or changing the code, make sure to add docu
 
 ## 3. Make a Pull Request
 
-You cannot push directly to master, you must make a pull request, have it reviewed by other contributors, then commit it to the repository. Only make a PR when the feature is ready to be added or is a significant change in a development feature.
+You cannot push directly to `main`, you must make a pull request, have it reviewed by other contributors, then commit it to the repository. Only make a PR when the feature is ready to be added or is a significant change in a development feature.
 
-Also, you must ensure you code is up to date. To do this rebase with master (keep commit logs easy to understand). Do this by executing the following commands. 
+Also, you must ensure you code is up to date. To do this rebase with `main` (keep commit logs easy to understand). Do this by executing the following commands. 
 
 ```bash
 # Assuming working on some feature branch named $feature_name
 
 # Go to feature branch
 git checkout $feature_name
-# Fetch up to date master
-git fetch origin master
-# Rebase current branch with master
-git rebase origin/master
+# Fetch up to date main
+git fetch origin main
+# Rebase current branch with main
+git rebase origin/main
 ```
 
 See [Creating a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request) guide from github for any more questions about how to make pull requests. 
@@ -49,4 +49,4 @@ In order to finish your PR, ensure you code follows the style guidelines of the 
 
 ## 5. Done
 
-If you follow all these steps, we should have a clean, working master branch.
+If you follow all these steps, we should have a clean, working `main` branch.
