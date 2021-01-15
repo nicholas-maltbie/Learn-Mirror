@@ -18,10 +18,7 @@ jobs:
         unityVersion:
           - 2019.4.18f1
         platform:
-          - StandaloneOSX       # Build a macOS standalone (Intel 64-bit).
           - StandaloneWindows64 # Build a Windows standalone.
-          - StandaloneLinux64   # Build a Linux 64-bit standalone.
-          - WebGL               # Build a WebGL version
     steps:
       - uses: actions/checkout@v2
         with:
