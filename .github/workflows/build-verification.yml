@@ -8,7 +8,7 @@ env:
 jobs:
   buildForSomePlatforms:
     name: Build for ${{ matrix.platform }} on version ${{ matrix.unityVersion }}
-    runs-on: ubuntu-latest
+    runs-on: Ubuntu-20.04
     strategy:
       fail-fast: false
       matrix:
@@ -20,8 +20,6 @@ jobs:
           - StandaloneWindows64 # Build a Windows standalone.
     steps:
       - uses: actions/checkout@v2
-        with:
-          lfs: false
 
       - name: Create LFS file list
         run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
