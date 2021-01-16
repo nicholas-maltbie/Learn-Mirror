@@ -47,7 +47,6 @@ public class NetworkControls : NetworkBehaviour
     /// <summary>
     /// Pitch of the player
     /// </summary>
-    [SyncVar]
     public float pitch;
 
     /// <summary>

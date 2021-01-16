@@ -229,8 +229,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c965b019e96a084ea21295168b6bb58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
 --- !u!114 &86492540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -556,7 +554,7 @@ MonoBehaviour:
   runInBackground: 1
   autoStartServerBuild: 1
   showDebugMessages: 0
-  serverTickRate: 30
+  serverTickRate: 120
   offlineScene: 
   onlineScene: 
   transport: {fileID: 1802173594}
@@ -569,7 +567,8 @@ MonoBehaviour:
     type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
-  spawnPrefabs: []
+  spawnPrefabs:
+  - {fileID: 6329441969849109950, guid: e7bb75ffed8b8584eaa5033dd9c97dd2, type: 3}
 --- !u!1 &1958043932
 GameObject:
   m_ObjectHideFlags: 0
