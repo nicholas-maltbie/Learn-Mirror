@@ -55,6 +55,12 @@ public class NetworkControls : NetworkBehaviour
     /// </summary>
     public float rotationRate = 180;
 
+    /// <summary>
+    /// How the character intended to move this frame
+    /// </summary>
+    /// <value>The direction the character tried to move this frame</value>
+    public Vector3 moveDirection;
+
     void Start()
     {
         this.characterController = this.GetComponent<CharacterController>();
@@ -106,7 +112,10 @@ public class NetworkControls : NetworkBehaviour
 
         // Normalize movement vector to be a max of 1 if greater than one
         movement = movement.magnitude > 1 ? movement / movement.magnitude : movement;
-        // Move player by displacement due to movement + velocity
-        this.characterController.Move((movementVelocity + velocity) * Time.deltaTime);
+        // Set how this character intended to move this frame
+        this.moveDirection = (movementVelocity + velocity);
+        // Move player by displacement
+        this.characterController.Move(this.moveDirection * Time.deltaTime);
+
     }
 }
