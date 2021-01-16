@@ -45,14 +45,15 @@ public class NetworkControls : NetworkBehaviour
     public float minPitch = -90;
 
     /// <summary>
+    /// Pitch of the player
+    /// </summary>
+    [SyncVar]
+    public float pitch;
+
+    /// <summary>
     /// Rotation rate of camera in degrees per second per one unit of axis movement
     /// </summary>
     public float rotationRate = 180;
-
-    /// <summary>
-    /// Current pitch and yaw of player camera
-    /// </summary>
-    public Vector2 cameraRotation = Vector2.zero;
 
     void Start()
     {
@@ -78,15 +79,16 @@ public class NetworkControls : NetworkBehaviour
             velocity = Vector3.zero;
         }
 
-        // Rotate player by mouse movement
-        cameraRotation += rotationRate * Time.deltaTime * new Vector2(-1 * Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"));
+        float yaw = transform.rotation.eulerAngles.y;
+        yaw += rotationRate * Time.deltaTime * Input.GetAxis("Mouse X");
+        pitch += rotationRate * Time.deltaTime * -1 * Input.GetAxis("Mouse Y");
         // Clamp rotation of camera between minimum and maximum specified pitch
-        cameraRotation.x = Mathf.Clamp(cameraRotation.x, minPitch, maxPitch);
+        pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
 
         // Set the player's rotation to be that of the camera's yaw
-        transform.rotation = Quaternion.Euler(0, cameraRotation.y, 0);
+        transform.rotation = Quaternion.Euler(0, yaw, 0);
         // Set pitch to be camera's rotation
-        cameraPosition.rotation = Quaternion.Euler(cameraRotation.x, cameraRotation.y, 0);
+        cameraPosition.rotation = Quaternion.Euler(pitch, yaw, 0);
 
         if (Input.GetButton("Jump"))
         {
