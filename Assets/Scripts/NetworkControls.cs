@@ -90,7 +90,7 @@ public class NetworkControls : NetworkBehaviour
         // Set pitch to be camera's rotation
         cameraPosition.rotation = Quaternion.Euler(pitch, yaw, 0);
 
-        if (Input.GetButton("Jump"))
+        if (this.characterController.isGrounded && Input.GetButton("Jump"))
         {
             velocity = new Vector3(0, this.jumpVelocity, 0);
         }
