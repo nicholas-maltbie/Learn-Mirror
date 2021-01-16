@@ -8,7 +8,7 @@ public class CreateProjectile : NetworkBehaviour
 {
     [SerializeField] private GameObject projectile;
     public Transform spawnLocation;
-    public float velocity = 3f;
+    public float velocity = 9f;
     void Update()
     {
         if(Input.GetButtonDown("Fire1"))
@@ -26,10 +26,17 @@ public class CreateProjectile : NetworkBehaviour
         var spawnVelocity = lookDirection*velocity;
         var proj = GameObject.Instantiate(projectile, spawnPosition.position, Quaternion.identity);
         proj.GetComponent<Rigidbody>().velocity = spawnVelocity;
+        proj.GetComponent<Projectile>().owner = this.gameObject;
         if(!isServer)
         {
             proj.GetComponent<NetworkIdentity>().AssignClientAuthority(this.GetComponent<NetworkIdentity>().connectionToClient);
         }
         NetworkServer.Spawn(proj);
+    }
+
+    public void DeleteProjectile(Projectile projectile)
+    {
+        NetworkServer.Destroy(projectile.gameObject);
+        Destroy(projectile.gameObject);
     }
 }

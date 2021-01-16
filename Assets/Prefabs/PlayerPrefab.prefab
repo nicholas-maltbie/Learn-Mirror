@@ -286,7 +286,7 @@ MonoBehaviour:
   projectile: {fileID: 6329441969849109950, guid: e7bb75ffed8b8584eaa5033dd9c97dd2,
     type: 3}
   spawnLocation: {fileID: 9123647436665473351}
-  velocity: 3
+  velocity: 9
 --- !u!114 &3876652949862356903
 MonoBehaviour:
   m_ObjectHideFlags: 0

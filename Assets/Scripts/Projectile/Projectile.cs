@@ -5,15 +5,17 @@ using Mirror;
 
 public class Projectile : NetworkBehaviour
 {
-    public float timeoutInSeconds = 1f;
+    public float timeoutInSeconds = 1f, currTime = 0;
+    public GameObject owner;
     private void Start() 
     {
         StartCoroutine(ProjectileTimeout());
     }
+
     public IEnumerator ProjectileTimeout()
     {
         yield return new WaitForSeconds(timeoutInSeconds);
-        DeleteObject();
+        owner.GetComponent<CreateProjectile>().DeleteProjectile(this);
     }
 
     [Command]
