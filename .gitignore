@@ -88,3 +88,6 @@ CodeCoverage
 # Temporary assets creating for builds
 /[Aa]ssets/StreamingAssets
 /[Aa]ssets/StreamingAssets.meta
+
+# Ignore package settings
+/ProjectSettings/Packages

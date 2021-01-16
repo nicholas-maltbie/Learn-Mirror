@@ -27,6 +27,18 @@ public class CharacterControllerPush : NetworkBehaviour
         this.movementSettings = this.GetComponent<NetworkControls>();
     }
 
+    void PushWithForce(GameObject hit, Vector3 force, Vector3 point)
+    {
+        if (isServer)
+        {
+            hit.GetComponent<Rigidbody>().AddForceAtPosition(force, point);
+        }
+        else
+        {
+            CmdPushWithForce(hit, force, point);
+        }
+    }
+
     /// <summary>
     /// Push a hit game object
     /// </summary>
@@ -36,10 +48,10 @@ public class CharacterControllerPush : NetworkBehaviour
     [Command]
     void CmdPushWithForce(GameObject hit, Vector3 force, Vector3 point)
     {
-        hit.GetComponent<Rigidbody>().AddForceAtPosition(force, point);
+        PushWithForce(hit, force, point);
     }
 
-    void OnControllerColliderHit (ControllerColliderHit hit)
+    void OnControllerColliderHit(ControllerColliderHit hit)
     {
         if (!isLocalPlayer)
         {
@@ -56,24 +68,25 @@ public class CharacterControllerPush : NetworkBehaviour
             return;
         }
 
-        UnityEngine.Debug.Log($"Hit something {hit.collider.gameObject}, {movementSettings.moveDirection * 1000}");
- 
         Vector3 force = Vector3.zero;
         // We use gravity and weight to push things down, we use
         // our velocity and push power to push things other directions
-        if (hit.moveDirection.y < -0.3) {
+        if (hit.moveDirection.y < -0.3)
+        {
             // If below us, push down
             // Only take the movement component associated with gravity
             force = Vector3.Scale(movementSettings.gravity.normalized, movementSettings.moveDirection) * pushPower;
             // Also add some force from gravity in case we're not moving down now
             force += movementSettings.gravity.normalized * weight;
-        } else {
+        }
+        else
+        {
             // If to the side, use the controller velocity
             // Project movement vector onto plane defined by gravity normal (horizontal plane)
             force = Vector3.ProjectOnPlane(movementSettings.moveDirection, movementSettings.gravity) * pushPower;
         }
-    
+
         // Apply the push
-        CmdPushWithForce(hit.collider.gameObject, force, hit.point);
+        PushWithForce(hit.collider.gameObject, force, hit.point);
     }
 }
